@@ -25,7 +25,7 @@ export default function HerdList() {
   );
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl mb-1 text-[var(--color-charcoal)]">Herd Intelligence</h1>

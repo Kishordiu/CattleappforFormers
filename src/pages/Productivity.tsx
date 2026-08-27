@@ -32,7 +32,7 @@ export default function Productivity() {
   };
 
   return (
-    <div className="space-y-8 max-w-5xl animate-in fade-in duration-500">
+    <div className="space-y-8 max-w-5xl">
       <div>
         <h1 className="font-serif text-3xl mb-1 text-[var(--color-charcoal)]">Productivity Intelligence</h1>
         <p className="text-[var(--color-charcoal-light)]">Record milk yields and track production trends over time.</p>

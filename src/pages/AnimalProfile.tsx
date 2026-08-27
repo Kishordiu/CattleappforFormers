@@ -26,7 +26,7 @@ export default function AnimalProfile() {
   if (!animal) return <div>Animal not found.</div>;
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8">
       <Link to="/herd" className="inline-flex items-center text-sm text-[var(--color-charcoal-light)] hover:text-[var(--color-charcoal)] transition-colors">
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Herd
       </Link>

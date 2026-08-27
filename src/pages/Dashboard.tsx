@@ -51,7 +51,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8">
       <div>
         <h1 className="font-serif text-4xl text-[var(--color-charcoal)] mb-1">
           {greeting}{user?.name ? `, ${user.name.split(' ')[0]}.` : '.'}

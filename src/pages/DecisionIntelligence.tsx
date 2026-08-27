@@ -29,7 +29,7 @@ export default function DecisionIntelligence() {
   };
 
   return (
-    <div className="space-y-8 max-w-4xl animate-in fade-in duration-500">
+    <div className="space-y-8 max-w-4xl">
       <div>
         <h1 className="font-serif text-3xl mb-1 text-[var(--color-charcoal)]">Decision Intelligence</h1>
         <p className="text-[var(--color-charcoal-light)]">What management action should be considered next?</p>

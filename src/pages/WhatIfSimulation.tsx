@@ -23,7 +23,7 @@ export default function WhatIfSimulation() {
   else if (simScore < 60) simRec = 'Consider Sale';
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8">
       <div className="max-w-3xl">
         <h1 className="font-serif text-4xl mb-2 text-[var(--color-charcoal)]">What happens if things change?</h1>
         <p className="text-lg text-[var(--color-charcoal-light)]">Explore how different management scenarios could influence the current recommendation.</p>
