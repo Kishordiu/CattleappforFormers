@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FAF9F6;
+  --color-ivory-dark: #F2EFE9;
+  --color-charcoal: #1E2320;
+  --color-charcoal-light: #2A302D;
+  --color-forest: #1A3E2F;
+  --color-forest-light: #2C5745;
+  --color-agri: #426B54;
+  --color-sage: #9AB2A4;
+  --color-earth: #8B6A56;
+  
+  /* Decision Colors */
+  --color-decision-green: #2E7D32;
+  --color-decision-blue: #1976D2;
+  --color-decision-amber: #F57C00;
+  --color-decision-red: #D32F2F;
+  
+  --color-decision-green-light: #E8F5E9;
+  --color-decision-blue-light: #E3F2FD;
+  --color-decision-amber-light: #FFF3E0;
+  --color-decision-red-light: #FFEBEE;
+
+  --font-serif: "Instrument Serif", "Newsreader", "DM Serif Display", serif;
+  --font-sans: "Inter", "Geist", "Manrope", sans-serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ivory);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231A3E2F' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--color-forest);
+  }
+}
+
+/* Custom Scrollbar for better UI feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-agri);
+}
