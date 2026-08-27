@@ -16,14 +16,14 @@ export default function AppLayout() {
         <div className="md:hidden flex items-center justify-between p-4 border-b border-black/5 bg-white sticky top-0 z-40">
           <span className="font-serif text-xl text-[var(--color-forest)]">Kangeyam Insight</span>
         </div>
-        
+
         <div className="p-4 md:p-8 max-w-7xl mx-auto">
           <Outlet />
         </div>
       </main>
 
       {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-black/5 pb-safe">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-black/5">
         <MobileNav />
       </div>
     </div>

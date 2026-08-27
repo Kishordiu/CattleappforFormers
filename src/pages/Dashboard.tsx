@@ -1,28 +1,38 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '@/context/AuthContext';
 import { getCattleList } from '@/services/api';
 import type { Cattle } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { DecisionBadge } from '@/components/ui/DecisionBadge';
 
 export default function Dashboard() {
+  const { t } = useTranslation();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [cattle, setCattle] = useState<Cattle[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadData = async () => {
-      const data = await getCattleList();
+    getCattleList().then(data => {
       setCattle(data);
       setLoading(false);
-    };
-    loadData();
+    });
   }, []);
+
+  const greeting = new Date().getHours() < 12
+    ? t('dashboard.greeting')
+    : new Date().getHours() < 17
+    ? 'Good afternoon'
+    : 'Good evening';
 
   if (loading) {
     return (
-      <div className="space-y-6">
-        <div className="h-12 w-64 bg-black/5 animate-pulse" />
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[1,2,3,4].map(i => <div key={i} className="h-32 bg-black/5 animate-pulse" />)}
+      <div className="space-y-6 animate-pulse">
+        <div className="h-12 w-80 bg-black/5 rounded" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {[1,2,3,4,5].map(i => <div key={i} className="h-32 bg-black/5 rounded" />)}
         </div>
       </div>
     );
@@ -36,83 +46,79 @@ export default function Dashboard() {
     sale: cattle.filter(c => c.recommendation === 'Consider Sale').length,
   };
 
+  const attentionAnimals = cattle.filter(
+    c => c.recommendation === 'Consider Sale' || c.recommendation === 'Monitor Closely'
+  );
+
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <div>
-        <h1 className="font-serif text-4xl text-[var(--color-charcoal)] mb-2">Good morning.</h1>
-        <p className="text-lg text-[var(--color-charcoal-light)]">Here is what your herd is telling you today.</p>
+        <h1 className="font-serif text-4xl text-[var(--color-charcoal)] mb-1">
+          {greeting}{user?.name ? `, ${user.name.split(' ')[0]}.` : '.'}
+        </h1>
+        <p className="text-lg text-[var(--color-charcoal-light)]">{t('dashboard.subtitle')}</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <Card className="bg-[var(--color-ivory-dark)]">
+      {/* KPI Row */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <Card className="bg-[var(--color-ivory-dark)] col-span-1">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-sans font-medium text-[var(--color-charcoal-light)] uppercase tracking-wider">Total Cattle</CardTitle>
+            <CardTitle className="text-xs font-sans font-semibold text-[var(--color-charcoal-light)] uppercase tracking-wider">
+              {t('dashboard.totalCattle')}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-serif text-[var(--color-charcoal)]">{counts.total}</div>
           </CardContent>
         </Card>
-        
-        <Card className="border-t-4 border-t-[var(--color-decision-green)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-sans font-medium text-[var(--color-decision-green)] uppercase tracking-wider">Continue Dairy</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-serif text-[var(--color-charcoal)]">{counts.continue}</div>
-          </CardContent>
-        </Card>
 
-        <Card className="border-t-4 border-t-[var(--color-decision-blue)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-sans font-medium text-[var(--color-decision-blue)] uppercase tracking-wider">Breeding Candidate</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-serif text-[var(--color-charcoal)]">{counts.breed}</div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-t-4 border-t-[var(--color-decision-amber)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-sans font-medium text-[var(--color-decision-amber)] uppercase tracking-wider">Monitor Closely</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-serif text-[var(--color-charcoal)]">{counts.monitor}</div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-t-4 border-t-[var(--color-decision-red)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-sans font-medium text-[var(--color-decision-red)] uppercase tracking-wider">Consider Sale</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-serif text-[var(--color-charcoal)]">{counts.sale}</div>
-          </CardContent>
-        </Card>
+        {[
+          { label: t('dashboard.continueDairy'), count: counts.continue, color: 'var(--color-decision-green)' },
+          { label: t('dashboard.breedingCandidate'), count: counts.breed, color: 'var(--color-decision-blue)' },
+          { label: t('dashboard.monitorClosely'), count: counts.monitor, color: 'var(--color-decision-amber)' },
+          { label: t('dashboard.considerSale'), count: counts.sale, color: 'var(--color-decision-red)' },
+        ].map(kpi => (
+          <Card key={kpi.label} style={{ borderTopColor: kpi.color }} className="border-t-4">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs font-sans font-semibold uppercase tracking-wider" style={{ color: kpi.color }}>
+                {kpi.label}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-4xl font-serif text-[var(--color-charcoal)]">{kpi.count}</div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
-      <div className="mt-12">
-        <h2 className="font-serif text-2xl mb-6">Needs Attention</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cattle.filter(c => c.recommendation === 'Consider Sale' || c.recommendation === 'Monitor Closely').map(animal => (
-            <Card key={animal.id} className="hover:border-black/20 transition-colors cursor-pointer group">
-              <CardHeader>
-                <div className="flex justify-between items-start mb-2">
-                  <div className="font-mono text-xs text-[var(--color-charcoal-light)]">{animal.id}</div>
+      {/* Attention List */}
+      {attentionAnimals.length > 0 && (
+        <div>
+          <h2 className="font-serif text-2xl mb-5 text-[var(--color-charcoal)]">
+            {t('dashboard.needsAttention')}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {attentionAnimals.map(animal => (
+              <div
+                key={animal.id}
+                onClick={() => navigate(`/cattle/${animal.id}`)}
+                className="bg-white border border-black/5 p-5 cursor-pointer hover:border-black/20 hover:shadow-sm transition-all group"
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <span className="font-mono text-xs text-[var(--color-charcoal-light)]">{animal.id}</span>
                   <DecisionBadge status={animal.recommendation} size="sm" />
                 </div>
-                <CardTitle className="text-xl group-hover:text-[var(--color-forest-light)] transition-colors">
+                <h3 className="font-serif text-xl text-[var(--color-charcoal)] group-hover:text-[var(--color-forest)] transition-colors mb-1">
                   {animal.name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-sm text-[var(--color-charcoal-light)]">
-                  Overall Score: <span className="font-semibold text-[var(--color-charcoal)]">{animal.overallScore}/100</span>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </h3>
+                <p className="text-sm text-[var(--color-charcoal-light)]">
+                  {t('dashboard.overallScore')}: <span className="font-semibold text-[var(--color-charcoal)]">{animal.overallScore}/100</span>
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
