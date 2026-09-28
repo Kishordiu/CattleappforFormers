@@ -1,33 +1,37 @@
-# Cattle App for Farmers
+# CATTLE APP
 
-> **A farmer-focused web prototype for practical cattle-management workflows.**
+![Cinematic hero](https://capsule-render.vercel.app/api?type=rect&color=0:070707,100:171717&height=230&text=CATTLE%20APP&fontColor=F3F3EE&fontSize=40&fontAlignY=38&desc=FARMER%20%2F%20LIVESTOCK%20TECH&descColor=999991&descSize=12&descAlignY=66&animation=blinking)
 
-This project explores a simple, accessible interface for farmers and livestock stakeholders, with an emphasis on clear information architecture and approachable web UX.
+> **FARMER / LIVESTOCK TECH.**
 
-## Highlights
-- Responsive farmer-oriented interface
-- Practical livestock information workflows
-- Component-driven React implementation
-- Lightweight Vite development setup
+## THE PREMISE
 
-## Stack
-React · TypeScript · Vite · Tailwind CSS
+Cattle App for Farmers explores a practical digital layer for livestock management, prioritising clear information, simple navigation and workflows that do not assume a highly technical user.
 
-## Run locally
-~~~bash
-npm install
-npm run dev
-~~~
+## THE EXPERIENCE
 
-Build:
+**Cattle App for Farmers explores a practical digital layer for livestock management, prioritising clear information, simple navigation and workflows that do not assume a highly technical user.**
 
-~~~bash
-npm run build
-npm run preview
-~~~
+## THE SYSTEM
 
-## Status
-**Prototype / learning project**
+Useful beats impressive. | Information should be readable in the field. | A livestock tool should reduce friction, not add dashboards for their own sake.
 
-## Author
-**K. Kishor Kumar** · [GitHub @Kishordiu](https://github.com/Kishordiu)
+## THE STACK
+
+A lightweight React/Vite frontend provides the product surface, leaving the data layer open for future animal records, reminders, health events and farm-level reporting.
+
+## RUN
+
+```bash
+Farmer / livestock-management prototype
+```
+
+## PROJECT STATE
+
+**React · TypeScript · Vite · Tailwind CSS**
+
+This README intentionally distinguishes implemented behaviour from future integrations so the project can evolve without overstating what exists today.
+
+---
+
+<p align="center"><strong>K. KISHOR KUMAR</strong><br><sub>ENGINEERING / PRODUCT / SYSTEMS</sub></p>
