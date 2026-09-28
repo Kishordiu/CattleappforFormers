@@ -1,32 +1,33 @@
-# React + TypeScript + Vite
+# Cattle App for Farmers
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **A farmer-focused web prototype for practical cattle-management workflows.**
 
-Currently, two official plugins are available:
+This project explores a simple, accessible interface for farmers and livestock stakeholders, with an emphasis on clear information architecture and approachable web UX.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Highlights
+- Responsive farmer-oriented interface
+- Practical livestock information workflows
+- Component-driven React implementation
+- Lightweight Vite development setup
 
-## React Compiler
+## Stack
+React · TypeScript · Vite · Tailwind CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run locally
+~~~bash
+npm install
+npm run dev
+~~~
 
-## Expanding the Oxlint configuration
+Build:
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+~~~bash
+npm run build
+npm run preview
+~~~
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Status
+**Prototype / learning project**
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Author
+**K. Kishor Kumar** · [GitHub @Kishordiu](https://github.com/Kishordiu)
