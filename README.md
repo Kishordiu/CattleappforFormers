@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/hero-banner.svg" alt="Cattle Care for Farmers — Agritech Decision Intelligence" width="100%" />
+  <img src="./assets/hero.png" alt="Cattle Care for Farmers — Agritech Decision Intelligence" width="100%" />
 </div>
 
 <p align="center">
